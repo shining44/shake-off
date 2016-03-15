@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.3.16/p5.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.3.16/addons/p5.dom.min.js"></script>
+	<script src="js/jquery-2.2.0.min.js"></script>
+	<script src="js/bootstrap.js"></script>
+	</head>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<style type="text/css">
+	#defaultCanvas{
+		width: 500px;
+		height: 500px;
+		background-color: white;
+	}
+	#circle{
+		width: 100px;
+		height: 100px;
+		background-color: blue;
+	}
+	</style>
+	<body>
+	<!-- <div id="circle"></div> -->
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">yo</div>
+			<div class="col-md-12">yoasdfsfd</div>
+		</div>
+	</div>
+
+
+
+		<script>
+		var label, serverResponse;	// UI elements
+		var input = [];
+		
+		function setup() {
+			createCanvas(windowWidth, windowHeight);			
+			// label = createSpan("Shaking Intensity:");	// the label 
+			label.position(10,20);				// position it
+			serverResponse = createSpan();	// create a div for server responses
+			serverResponse.position(label.width + 15, 20);		// position it
+
+			arrayLength = createSpan("arrayLength");
+			arrayLength.position(1,1);
+
+			getData(3);								// make a request back to the server
+		}
+
+		function windowResized() {
+		  resizeCanvas(windowWidth, windowHeight);
+		}
+		
+		// this function makes a call to the server:
+  		function getData(channel) {
+  			httpGet('/device/' + channel, update);
+  		}
+  		
+  		// update the page when the server responds:
+  		function update(data) {
+	  		serverResponse.html(data);		// put the response in the span
+	  		fill(255);
+	  		rect(0, 0, 500, 500);
+	  		fill(100,203,10); // colour the circle
+	  		ellipse(300,100,data,data); // create our ellipse
+	  		
+	  		input[0] = data;
+	  		// input.push(data);
+	  		arrayLength.html(input);
+
+	  		getData(3);							// make another call to the server
+	  		// $("#circle").css("width", data);
+  		}
+
+  		$("#circle").css("width", data);
+  		$(document).ready(function() {
+
+		    function loop() {
+		        $('#circle').animate ({ size: input[0] ,}, 5000, 'linear', function() {
+		            loop();
+		        });
+		    }
+		        
+		    loop();
+		 });
+
+  		
+ 		</script>
+	</body>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.3.16/p5.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.3.16/addons/p5.dom.min.js"></script>
+	<script src="js/jquery-2.2.0.min.js"></script>
+	<script src="js/bootstrap.js"></script>
+	</head>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<style type="text/css">
+	body{
+		background-color: orange;
+	}
+	#defaultCanvas{
+		width: 500px;
+		height: 500px;
+		background-color: white;
+	}
+	#circle{
+		width: 100px;
+		height: 100px;
+		background-color: blue;
+	}
+	.col-md-6{
+		text-align: center;
+	}
+	.circle{
+		border-radius: 50%;
+		background-color: white;
+		width: 300px;
+		height: 300px;
+		display: flex;
+	    justify-content: center; /* align horizontal */
+	    align-items: center; /* align vertical */
+	}
+	.buildup{
+		background-color: white;
+		height: 500px;
+		display: flex;
+	    justify-content: center; /* align horizontal */
+	    align-items: center; /* align vertical */
+	}
+	.countdown{
+		font-size: 42px;
+		font-weight: bold;
+	}
+	.title{
+		display: block;
+		margin: 3px;
+		font-weight: 900;
+	}
+	.center{
+		margin-left: 25%;
+	}
+	.shake-circles, .winner{
+		display: none;
+	}
+	</style>
+	<body>
+	<!-- <div id="circle"></div> -->
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12 winner"></div>
+			<div class="col-md-12 buildup">
+				Get ready to shake!
+				<br>
+				<br>
+				<button onclick="go()">countdown!</button>
+				<div class="countdown"></div>
+			</div>
+			<div class="center">
+				<div class="shake-circles">
+					<div class="col-md-6 circle computer">
+						<div class="title">the others: </div>
+						<div class="computer-score"></div>
+					</div>
+					<div class="col-md-6 circle yourscore">yoasdfsfd</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+		<script>
+			// $(".shake-circles").hide();
+			var time = 4;
+			var waitingTime = 999999;
+
+			var arduinoInput;
+
+			function go(){
+				$("button").hide();
+				var countdownTimer = setInterval(countdown, 1000);
+				function countdown(){
+					if ($(".shake-circles").is(':hidden')) {
+						time--;
+					}
+					$(".countdown").html(time);
+					if (time <= 0){
+						$(".buildup").hide();
+						$(".shake-circles").show();
+						var something = setInterval(increaseAIScore, 100);
+						var somethingelse = setInterval(increaseHumanScore, 100);
+					} else {
+						$(".shake-circles").hide();
+					}
+				}
+
+				setTimeout(function(){
+					$(".winner").show();
+					
+					if (scoreAI > humanScore){
+						$(".winner").html("Computer Wins!");
+					} else {
+						$(".winner").html("Human Wins!");
+					}
+					$(".shake-circles").hide();
+				}, 15000);
+				
+			}
+
+			
+
+			//var countdownTimer = setInterval(countdown, waitingTime);
+
+			
+			//console.log(waitingTime);
+
+
+
+			var scoreAI = 0;
+			var humanScore = 0;
+
+			function increaseAIScore(){
+				if (scoreAI >= 0 && scoreAI < 30000){
+					scoreAI += 15;
+				}
+				// console.log(scoreAI);
+				$(".computer-score").html(scoreAI);
+
+			}
+			function increaseHumanScore(){
+				//humanScore = humanScore + arduinoInput;
+				$(".yourscore").html(humanScore);
+			}
+			increaseAIScore();
+			
+			
+
+
+		var label, serverResponse;	// UI elements
+		var input = [];
+		
+		function setup() {
+			//createCanvas(windowWidth, windowHeight);			
+			// label = createSpan("Shaking Intensity:");	// the label 
+			//label.position(10,20);				// position it
+			//serverResponse = createSpan();	// create a div for server responses
+			//serverResponse.position(label.width + 15, 20);		// position it
+
+			//arrayLength = createSpan("arrayLength");
+			//arrayLength.position(1,1);
+
+			getData(3);								// make a request back to the server
+		}
+
+		function windowResized() {
+		  //resizeCanvas(windowWidth, windowHeight);
+		}
+		
+		// this function makes a call to the server:
+  		function getData(channel) {
+  			httpGet('/device/' + channel, update);
+  		}
+  		
+  		// update the page when the server responds:
+  		function update(data) {
+	  		// serverResponse.html(data);		// put the response in the span
+	  		// fill(255);
+	  		// rect(0, 0, 500, 500);
+	  		// fill(100,203,10); // colour the circle
+	  		// ellipse(300,100,data,data); // create our ellipse
+	  		arduinoInput = parseInt(data);
+	  		humanScore = humanScore + arduinoInput;
+	  		input[0] = data;
+	  		// input.push(data);
+	  		//arrayLength.html(input);
+
+	  		getData(3);							// make another call to the server
+	  		// $("#circle").css("width", data);
+	  		console.log(data);
+  		}
+  		
+  		//$("#circle").css("width", data);
+  		$(document).ready(function() {
+
+		 });
+
+  		
+ 		</script>
+	</body>
+</html>
