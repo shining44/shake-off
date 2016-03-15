@@ -1,5 +1,5 @@
-//Code by Ali Tayyebi (satjazayeri@gmail.com)
-//includes bits of modified code from Adafruit (thank you for the camera library!) and the Arduino folks
+// Code by Deron Li (deron_li@hotmail.com) + Riley Co (rileyco@live.com) + Ali Tayyebi (satjazayeri@gmail.com)
+// includes bits of modified code from Adafruit + Arduino folks
 
 #include <Adafruit_NeoPixel.h>
 #ifdef __AVR__
