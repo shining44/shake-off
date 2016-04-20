@@ -1,0 +1,144 @@
+@font-face{
+	font-family: geo;
+	font-weight: normal;
+	src: url(../fonts/Geogtq-Rg.otf);
+}
+@font-face{
+	font-family: geoIt;
+	font-weight: lighter;
+	src: url(../fonts/Geogtq-Th.otf);
+}
+@font-face{
+	font-family: geo;
+	font-style: italic;
+	src: url(../fonts/Geog-ThIt.otf);
+}
+@font-face{
+	font-family: geometria;
+	src: url(../fonts/Geometria-Italic.otf);
+}
+html, body{
+	background-color: orange;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+#defaultCanvas{
+	display: none;
+}
+#circle{
+	width: 100px;
+	height: 100px;
+	background-color: blue;
+}
+.col-md-6{
+	text-align: center;
+}
+.row{
+	/*height: 100vh;*/
+}
+.computer{
+	/*background-color: teal;*/
+	background: url('../img/stephen4.jpg');
+	background-size: cover;
+	overflow: hidden;
+}
+.yourscore{
+	/*background-color: lightgrey;*/
+	background: url('../img/kyle2.jpg');
+	background-size: cover;
+	overflow: hidden;
+}
+.circle{
+	height: 100%;
+	display: flex;
+    justify-content: center; /* align horizontal */
+    align-items: center; /* align vertical */
+}
+.buildup{
+	background-color: white;
+	height: 100vh;
+	display: flex;
+    justify-content: center; /* align horizontal */
+    align-items: center; /* align vertical */
+}
+.countdown{
+	font-size: 85px;
+	font-weight: bold;
+	font-family: geometria;
+	/*width: 100%;*/
+	float: left;
+	display: block;
+}
+.title{
+	display: block;
+	margin: 3px;
+	font-weight: 900;
+}
+.center{
+	margin-left: 25%;
+}
+.shake-circles, .winner{
+	display: none;
+}
+.half{
+	display: inline-flex;
+	float: left;
+	overflow: hidden;
+	width: 50%;
+	margin: 0;
+	height: 100vh;
+	font-family: geo;
+	font-weight: normal;
+	color: white;
+	font-size: 80px;
+}
+.winner{
+	text-align: center;
+	font-size: 80px;
+	font-family: geo;
+	font-weight: normal;
+}
+.vertical-alignment-helper {
+	display:table;
+	height: 100%;
+	width: 100%;
+	pointer-events:none; /* This makes sure that we can still click outside of the modal to close it */
+}
+.vertical-align-center {
+    /* To center vertically */
+    display: table-cell;
+    vertical-align: middle;
+    pointer-events:none;
+}
+.modal-content {
+    /* Bootstrap sets the size of the modal in the modal-dialog class, we need to inherit it */
+    width:inherit;
+    height:inherit;
+    /* To center horizontally */
+    margin: 0 auto;
+    pointer-events: all;
+}
+.getReady{
+	font-family: geo;
+	font-weight: normal;
+	font-size: 80px;
+	border-bottom: 15px solid transparent;
+	transition: all ease-in-out 0.4s;	
+}
+.getReady:hover{
+	border-color: orange;
+	cursor: pointer;
+}
+.reset{
+	text-align: center;
+	font-family: geoIt;
+	font-style: italic;
+	font-size: 30px;
+	/*border-bottom: 3px solid transparent;*/
+	transition: all ease-in-out 0.4s;	
+}
+.reset:hover{
+	color: orange;
+	cursor: pointer;
+}
